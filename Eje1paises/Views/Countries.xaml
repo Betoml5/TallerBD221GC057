@@ -1,0 +1,99 @@
+﻿<Window x:Class="Eje1paises.Views.Countries"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eje1paises.Views"
+        xmlns:viewmodels="clr-namespace:Eje1paises.ViewModels"
+        mc:Ignorable="d"
+        Title="Countries" Height="750" Width="800">
+        
+   
+    <DockPanel Background="#222831">
+        <DockPanel.DataContext>
+            <viewmodels:CountriesViewModel></viewmodels:CountriesViewModel>
+        </DockPanel.DataContext>
+        <TextBlock DockPanel.Dock="Top" Foreground="#00ADB5" FontSize="28" Padding="10" FontFamily="Comic Sans MS">Listado de paises</TextBlock>
+        <Border DockPanel.Dock="Top">
+        </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".30*"></ColumnDefinition>
+                <ColumnDefinition Width=".70*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+            <ListBox Name="lstCountries" ItemsSource="{Binding Countries.CountryList}"   Margin="10" SelectedIndex="0" Background="#393E46" BorderBrush="Transparent">
+                <ListBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                    <Style TargetType="ListBoxItem" >
+                        <Setter Property="Foreground" Value="#fff"></Setter>
+                        
+                    </Style>
+                </ListBox.Resources>
+
+            
+
+            </ListBox>
+            <StackPanel Grid.Column="1" >
+                <StackPanel.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="20"></Setter>
+                        <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+                        <Setter Property="Foreground" Value="#fff"></Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <Label>Nombre del pais: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.Name}"></TextBlock>
+
+                <Label>Continente: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.Continent}"></TextBlock>
+
+                <Label>Región: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.Region}"></TextBlock>
+
+                <Label>Area: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.SurfaceArea}"></TextBlock>
+
+
+                <Label>Forma de gobierno: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.GovernmentForm}"></TextBlock>
+
+
+                <Label>Cabeza de estado: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.HeadOfState}"></TextBlock>
+
+
+                <Label>Año de independecia: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.IndepYear}"></TextBlock>
+
+
+                <Label>Esperanza de vida: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.LifeExpectancy}"></TextBlock>
+
+
+                <Label>Nombre local: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.LocalName}"></TextBlock>
+
+
+                <Label>Numero de habitantes: </Label>
+                <TextBlock Text="{Binding ElementName=lstCountries, Path=SelectedItem.Population}"></TextBlock>
+
+            </StackPanel>
+
+            <!--Code = (string)reader["Code"],
+                    Name = (string)reader["Name"],
+                    Continent = (string)reader["continent"],
+                    Region = (string)reader["region"],
+                    SurfaceArea = (double)reader["surfacearea"],
+                    GovermentForm = (string)reader["govermentForm"],
+                    HeadOfState = (string)reader["headofstate"],
+                    IndepYear = (ushort)reader["indepyear"],
+                    LifeExpectaty = (double)reader["lifeexpectaty"],
+                    LocalName = (string)reader["localname"],
+                    Population = (int)reader["population"]-->
+        </Grid>
+    </DockPanel>
+</Window>
