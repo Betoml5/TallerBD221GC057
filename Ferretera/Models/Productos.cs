@@ -13,7 +13,11 @@ namespace Ferretera.Models
         public ObservableCollection<Producto> ListaProductos { get; set; } = new ObservableCollection<Producto>();
         public List<Seccion> ListaSecciones { get; set; } = new List<Seccion>();
 
-         MySqlConnection conexion { get; set; }
+        public decimal PromedioPrecio { get; set; } = 0;
+        public decimal PromedioSeccion { get; set; } = 0;
+
+
+        MySqlConnection conexion { get; set; }
          MySqlCommand commandoSQL { get; set; }
          MySqlDataReader lector { get; set; }
         public Productos()
@@ -70,9 +74,17 @@ namespace Ferretera.Models
 
                 ListaSecciones.Add(s);
             }
-
             lector.Close();
 
+            commandoSQL.CommandText = "SELECT AVG(PRECIO) as PromedioPrecio FROM PRODUCTOS;";
+            lector = commandoSQL.ExecuteReader();
+            while (lector.Read())
+            {
+                PromedioPrecio = (decimal)lector["PromedioPrecio"];
+            }
+
+            lector.Close();
+            
         }
 
         ~Productos()
@@ -115,11 +127,25 @@ namespace Ferretera.Models
             }
 
             lector.Close();
-
             if (ListaProductos.Count == 0)
             {
                 ListaProductos = clonProductos;
             }
+
+            commandoSQL.CommandText = $"SELECT AVG(PRECIO) AS PROMEDIOPRECIO FROM PRODUCTOS WHERE PRODUCTOS.IDSECCION = {s.Id}";
+            lector = commandoSQL.ExecuteReader();
+
+
+            while (lector.Read())
+            {
+                PromedioSeccion = Convert.IsDBNull(lector["PROMEDIOPRECIO"]) ? 0 : (decimal)lector["PROMEDIOPRECIO"];
+            }
+
+            lector.Close();
+           
+
+           
+
         }
     }
 }

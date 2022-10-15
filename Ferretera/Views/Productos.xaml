@@ -12,19 +12,34 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".1*"></RowDefinition>
-            <RowDefinition Height=".9*"></RowDefinition>
+            <RowDefinition Height=".2*"></RowDefinition>
+            <RowDefinition Height=".8*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.DataContext>
             <viewmodels:ProductosViewModel></viewmodels:ProductosViewModel>
         </Grid.DataContext>
         <DockPanel VerticalAlignment="Center">
-            <TextBlock DockPanel.Dock="Left" Margin="20,0,0,0" FontWeight="Bold" FontSize="24" FontFamily="Comic Sans MS" Foreground="#fff">Lista de Productos</TextBlock>
+            <StackPanel>
+                <TextBlock DockPanel.Dock="Left" Margin="20,0,0,0" FontWeight="Bold" FontSize="24" FontFamily="Comic Sans MS" Foreground="#fff">Lista de Productos</TextBlock>
+                <TextBlock Foreground="#fff" Margin="20,0" >
+                    Promedio de precio:
+                    <TextBlock Text="{Binding Productos.PromedioPrecio, StringFormat={}{0:C0}.00}" Foreground="Green" FontWeight="Bold">
+                        
+                    </TextBlock>
+                </TextBlock>
+                <TextBlock Foreground="#fff" Margin="20,0" >
+                    Promedio de precio de sección:
+                    <TextBlock Text="{Binding Productos.PromedioSeccion, StringFormat={}{0:C0}.00}" Foreground="Green" FontWeight="Bold">
+                    </TextBlock>
+                </TextBlock>
+            </StackPanel>
             <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
                 <ComboBox Margin="10,0" VerticalContentAlignment="Center" Width="250" Text="Selecciona una opcion" Focusable="True" ItemsSource="{Binding Productos.ListaSecciones}"  Grid.Row="1" Name="cmbSeccion">
                 </ComboBox>
                 <Button Width="100" HorizontalAlignment="Right"  Command= "{Binding ProductosPorSeccionCommand}" CommandParameter="{Binding ElementName=cmbSeccion, Path=SelectedItem}">Buscar</Button>
             </WrapPanel>
+            
+            
             
         </DockPanel>
         <DataGrid Background="#393E46" BorderBrush="Transparent" BorderThickness="0" IsReadOnly="True" Name = "dataGrid" AlternatingRowBackground = "#00ADB5"  Grid.Row="2"

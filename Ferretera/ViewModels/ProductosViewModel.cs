@@ -14,6 +14,7 @@ namespace Ferretera.ViewModels
     public class ProductosViewModel: INotifyPropertyChanged
     {
         public Productos Productos { get; set; } = new Productos();
+        
         public ICommand ProductosPorSeccionCommand { get; set; }   
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -26,6 +27,8 @@ namespace Ferretera.ViewModels
         private void ProductosPorSeccion(Seccion s)
         {
             Productos.ProductosPorSeccion(s);
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
     }
 }
