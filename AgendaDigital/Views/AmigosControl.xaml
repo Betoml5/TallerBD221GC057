@@ -5,15 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgendaDigital.Views" xmlns:viewmodels="clr-namespace:AgendaDigital.ViewModels"
         mc:Ignorable="d"
-        Title="AmigosControl" Height="450" Width="800">
+        Title="AmigosControl" Height="650" Width="800">
     <DockPanel>
         <ContentControl>
             <ContentControl.DataContext>
-                <viewmodels:AmigoViewModel></viewmodels:AmigoViewModel>
+                <viewmodels:AmigoViewModel x:Name="amigosvm"></viewmodels:AmigoViewModel>
             </ContentControl.DataContext>
-        </ContentControl>
-        <ContentControl.Resources>
+            <ContentControl.Resources>
+                <local:Amigos x:Key="amigos"></local:Amigos>
+                <local:Agregar x:Key="agregar"></local:Agregar>
+                <local:AmigoDetalles x:Key="detalles"></local:AmigoDetalles>
+            </ContentControl.Resources>
+
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Vista}" Value="amigos">
+                            <Setter Property="Content" Value="{StaticResource amigos}" ></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Vista}" Value="agregar">
+                            <Setter Property="Content" Value="{StaticResource agregar}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Vista}" Value="detalles">
+                            <Setter Property="Content" Value="{StaticResource detalles}"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
             
-        </ContentControl.Resources>
+        </ContentControl>
+        
     </DockPanel>
 </Window>

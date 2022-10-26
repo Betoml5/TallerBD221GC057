@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Math.Field;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,7 +32,6 @@ namespace AgendaDigital.Models
             comandoSQL.CommandText = "SELECT * FROM AMIGOS";
             lector = comandoSQL.ExecuteReader();
 
-
             while (lector.Read())
             {
                 Amigo a = new()
@@ -50,11 +50,16 @@ namespace AgendaDigital.Models
             
         }
 
-        public int Crear(Amigo a)
+        public void Crear(Amigo a)
         {
-            comandoSQL.CommandText = $"INSERT INTO AMIGOS (Nombre, FechaNacimiento, Telefono, CorreoElectronico) VALUES ({a.Nombre}, {a.FechaNacimiento.ToString("YYYY-MM-DD")}, {a.Telefono}, {a.CorreoElectronico})";
+            //comandoSQL.CommandText = $"INSERT INTO AMIGOS (Nombre, FechaNacimiento, Telefono, CorreoElectronico) VALUES ({a.Nombre}, {a.FechaNacimiento:YYYY-MM-DD}, {a.Telefono}, {a.CorreoElectronico})";
+            comandoSQL.CommandText = string.Format("INSERT INTO AMIGOS (Nombre, FechaNacimiento, Telefono, CorreoElectronico) VALUES ('{0}', '{1}', '{2}', '{3}')", a.Nombre, a.FechaNacimiento.ToString("yyyy-MM-dd"), a.Telefono, a.CorreoElectronico);
             var rowsAffected = comandoSQL.ExecuteNonQuery();
-            return rowsAffected;  
+            if (rowsAffected > 0)
+            {
+                ListaAmigos.Add(a);
+            }
+     
         }
 
         public Amigo BuscarPorId(Amigo a)
@@ -70,7 +75,6 @@ namespace AgendaDigital.Models
                 amigo.FechaNacimiento = (DateTime)lector["FECHANACIMIENTO"];
                 amigo.CorreoElectronico = (string)lector["CORREOELECTRONICO"];
                 amigo.Telefono = (string)lector["TELEFONO"];
-
             }
 
             return amigo;
@@ -79,19 +83,62 @@ namespace AgendaDigital.Models
 
         public int Borrar(Amigo a)
         {
-            comandoSQL.CommandText = $"DELETE * FROM AMIGOS WHERE ID = {a.Id}";
+            comandoSQL.CommandText = $"DELETE FROM AMIGOS WHERE ID = {a.Id}";
             var rowsAffected = comandoSQL.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                ListaAmigos.Remove(a);
+                return rowsAffected;
+            }
 
             return rowsAffected;
             
         }
 
-        public int Editar(Amigo a)
+        public void Editar(Amigo a)
         {
-            comandoSQL.CommandText = $"UPDATE AMIGOS SET NOMBRE = {a.Nombre} TELEFONO = {a.Telefono} CORREOELECTRONICO = {a.CorreoElectronico} WHERE ID = {a.Id}";
-            var rowsAffected = comandoSQL.ExecuteNonQuery();
 
-            return rowsAffected;
+            if (a != null)
+            {
+                comandoSQL.CommandText = $"UPDATE AMIGOS SET NOMBRE = '{a.Nombre}', TELEFONO = '{a.Telefono}', CORREOELECTRONICO = '{a.CorreoElectronico}', FECHANACIMIENTO = '{a.FechaNacimiento.ToString("yyyy-MM-dd")}' WHERE ID = {a.Id}";
+
+                if (comandoSQL.ExecuteNonQuery() != 0)
+                {
+                    var temporal = ListaAmigos.FirstOrDefault(amigo => amigo.Id == a.Id);
+                    if (temporal != null)
+                    {
+                        temporal.Nombre = a.Nombre;
+                        temporal.CorreoElectronico = a.CorreoElectronico;
+                        temporal.Telefono = a.Telefono;
+                        temporal.FechaNacimiento = a.FechaNacimiento;
+                    }
+                }
+            }
+            
+         
+        }
+
+        public  bool Validar(Amigo a, out List<string> errores)
+        {
+            errores = new();
+            if (string.IsNullOrWhiteSpace(a.Nombre))
+                    errores.Add("El nombre es obligatorio");
+                if (string.IsNullOrWhiteSpace(a.CorreoElectronico))
+                    errores.Add("El correo electrónico es obligatorio");
+                if (string.IsNullOrWhiteSpace(a.Telefono))
+                    errores.Add("El telefono es obligatorio");
+                if (string.IsNullOrWhiteSpace(a.FechaNacimiento.ToString()))
+                    errores.Add("La fecha de nacimiento es obligatoria");
+                if (a.FechaNacimiento > DateTime.Now)
+                    errores.Add("La fecha de nacimiento no puede ser mayor a la fecha actual");
+                if (ListaAmigos.Any(amigo => amigo.Telefono == a.Telefono) && ListaAmigos.Any(amigo => amigo.Id != a.Id))
+                    errores.Add("Ese numero de telefono ya existe");
+                if (ListaAmigos.Any(amigo => amigo.CorreoElectronico == a.CorreoElectronico) && ListaAmigos.Any(amigo => amigo.Id != a.Id))
+                    errores.Add("Ese correo electronico ya existe");
+                if (a.Telefono != null && a.Telefono.Length > 10)
+                    errores.Add("El tamaño maximo del numero telefono es de 10 digitos");
+           
+            return errores.Count == 0;
         }
     }
 }

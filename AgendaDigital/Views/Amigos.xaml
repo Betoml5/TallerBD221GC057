@@ -1,84 +1,116 @@
-﻿<Window x:Class="AgendaDigital.Views.Amigos"
+﻿<UserControl x:Class="AgendaDigital.Views.Amigos"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AgendaDigital.Views" xmlns:viewmodels="clr-namespace:AgendaDigital.ViewModels"
-        mc:Ignorable="d"
-        Title="Amigos" Height="450" Width="800">
+        xmlns:local="clr-namespace:AgendaDigital.Views" xmlns:viewmodels="clr-namespace:AgendaDigital.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AmigoViewModel}"
+             mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.DataContext>
-            <viewmodels:AmigoViewModel></viewmodels:AmigoViewModel>
-            </Grid.DataContext>
+
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Cursor" Value="Hand"></Setter>
+            </Style>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Cursor" Value="Hand"></Setter>
+            </Style>
+        </Grid.Resources>
+      
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".4*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
         <StackPanel Background="#08D9D6">
             <TextBlock Margin="10" FontWeight="Bold" FontSize="20" Foreground="#FFF" >AGENDA</TextBlock>
-            <ListBox Name="lstAmigos" Background="#FF2E63" Foreground="#fff" FontWeight="Bold" Margin="10" Grid.Column="0" ItemsSource="{Binding AmigosControlador.ListaAmigos}" SelectedIndex="0">
-               
-            </ListBox>
+            <Border CornerRadius="8"  Background="#FF2E63" Margin="10">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect></DropShadowBitmapEffect>
+                </Border.BitmapEffect>
+                <ListBox Name="lstAmigos"
+                     BorderBrush="Transparent"
+                     Background="#FF2E63"
+                     Foreground="#fff"
+                     FontWeight="Bold" Margin="10"
+                     Grid.Column="0"
+                     ItemsSource="{Binding AmigosControlador.ListaAmigos}"
+                     SelectedIndex="{Binding PosicionSeleccionada}"
+                         
+                     >
+                </ListBox>
+            </Border>
                 
-            <Button Margin="10" Background="#252A34" Foreground="#fff" Padding="8">Agregar</Button>
+            <Button
+                    Margin="10" Background="#252A34"
+                    Foreground="#fff" Padding="8"
+                    FontWeight="Bold"
+                    Command="{Binding CambiarVistaCommand}"
+                    CommandParameter="agregar">
+                    AGREGAR NUEVO AMIGO
+            </Button>
             
         </StackPanel>
 
         <StackPanel Grid.Column="1" Background="#252A34">
             <Border Background="#EAEAEA" Padding="20" Margin="40" CornerRadius="10" HorizontalAlignment="Center">
+                <Border.Resources>
+                    <Style x:Key="m" TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="Bold"></Setter>
+                    </Style>
+                </Border.Resources>
                 <Border.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect />
                 </Border.Effect>
                 <StackPanel>
-
-                <TextBlock HorizontalAlignment="Center">
+                    
+                <TextBlock>
                     Nombre:    
-                    <TextBlock  Text="{Binding ElementName=lstAmigos, Path=SelectedItem.Nombre}"> 
+                    <TextBlock Style="{StaticResource m}" Text="{Binding ElementName=lstAmigos, Path=SelectedItem.Nombre}"> 
                     </TextBlock>
                 </TextBlock>
 
 
-                    <TextBlock HorizontalAlignment="Center" >
+                    <TextBlock  >
                         Numero de telefono:
-                     <TextBlock Text="{Binding ElementName=lstAmigos, Path=SelectedItem.Telefono}"> 
+                     <TextBlock Style="{StaticResource m}"  Text="{Binding ElementName=lstAmigos, Path=SelectedItem.Telefono}"> 
                         </TextBlock>
                     </TextBlock>
 
-                    <TextBlock HorizontalAlignment="Center" >
+                    <TextBlock  >
                         Correo Electronico:
-                     <TextBlock Text="{Binding ElementName=lstAmigos, Path=SelectedItem.CorreoElectronico}"> 
+                     <TextBlock Style="{StaticResource m}" Text="{Binding ElementName=lstAmigos, Path=SelectedItem.CorreoElectronico}"> 
                         </TextBlock>
                     </TextBlock>
 
-                    <WrapPanel HorizontalAlignment="Center" Margin="0,10,0,0">
-                        
-                        <Button Margin="0,0,10,0" Background="#FF2E63" Padding="8" Foreground="#fff">Eliminar</Button>
+                    <TextBlock  >
+                        Fecha de nacimiento:
+                     <TextBlock Style="{StaticResource m}" Text="{Binding ElementName=lstAmigos, StringFormat=d, Path=SelectedItem.FechaNacimiento}"> 
+                        </TextBlock>
+                    </TextBlock>
+
+                    <WrapPanel Margin="0,10,0,0">
+                        <Button Margin="0,0,10,0"
+                                Background="#FF2E63"
+                                Padding="8" 
+                                Foreground="#fff"
+                                Command="{Binding EliminarAmigoCommand}"
+                                CommandParameter="{Binding ElementName=lstAmigos, Path=SelectedItem}"
+                                >
+                            Eliminar</Button>
+                        <Button Margin="0,0,10,0"
+                                Background="#08D9D6"
+                                Padding="8" 
+                                Foreground="#fff"
+                                Command="{Binding DetallesAmigoCommand}"
+                                CommandParameter="{Binding ElementName=lstAmigos, Path=SelectedItem}"
+                                >
+                            Ver detalles</Button>
                     </WrapPanel>
                 </StackPanel>
             </Border>
 
-            <StackPanel Margin="40">
-                <StackPanel.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="Foreground" Value="#fff"></Setter>
-                    </Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Padding" Value="5"></Setter>
-                    </Style>
-                </StackPanel.Resources>
-                <Label>Nombre:</Label>
-                <TextBox Text="{Binding ElementName=lstAmigos,Path=SelectedItem.Nombre}"></TextBox>
-
-                <Label>Numero de telefono:</Label>
-                <TextBox Text="{Binding ElementName=lstAmigos,Path=SelectedItem.Telefono}"></TextBox>
-
-                <Label>Correo electronico:</Label>
-                <TextBox Text="{Binding ElementName=lstAmigos,Path=SelectedItem.CorreoElectronico}"></TextBox>
-                <Button Background="#08D9D6" Foreground="#000" FontWeight="Bold" Margin="0,10,0,0" Padding="8">EDITAR</Button>
-
-
-            </StackPanel>
+            
             
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>
