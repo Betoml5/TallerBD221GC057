@@ -46,8 +46,8 @@
                     CommandParameter="amigos">
                     CANCELAR
                 </Button>
-
             </WrapPanel>
+            <TextBlock Text="{Binding Error}"></TextBlock>
         </StackPanel>
     </StackPanel>
 </UserControl>

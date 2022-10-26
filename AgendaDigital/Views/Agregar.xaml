@@ -48,7 +48,7 @@
                 </Button>
 
             </WrapPanel>
-            <TextBlock Text="{Binding Error}"></TextBlock>
+            <TextBlock Text="{Binding Error}">Errores</TextBlock>
         </StackPanel>
     </StackPanel>
 </UserControl>

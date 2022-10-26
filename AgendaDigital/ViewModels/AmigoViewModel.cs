@@ -20,10 +20,12 @@ namespace AgendaDigital.ViewModels
         public int PosicionSeleccionada { get; set; }
         public Amigo Amigo { get; set; }
         public string Error { get; set; } = "";
+
         public string Mensaje { get; set; } = "";
         public string Vista { get; set; } = "amigos";
 
         int posicionInicial;
+
         public ICommand CambiarVistaCommand { get; set; }
         public ICommand AgregarAmigoCommand { get; set; }
         public ICommand EliminarAmigoCommand { get; set; }
@@ -102,6 +104,10 @@ namespace AgendaDigital.ViewModels
             if (AmigosControlador.Validar(a, out List<string> errores))
             {
 
+                foreach (var item in errores)
+                {
+                    Error += $"{item}\n";
+                }
                 AmigosControlador.Crear(a);
                 CambiarVista("amigos");
             }
@@ -128,20 +134,22 @@ namespace AgendaDigital.ViewModels
                 {
                     Mensaje = "¡Eliminado Satisfactoriamente!";
                 }
-                else
-                {
-                    Errores.Add("¡Hubo un error al intentar eliminar el amigo");
-                }
+                
             }
         }
         public void Editar(Amigo a)
         {
             if (AmigosControlador.Validar(a, out List<string> errores))
             {
-
+                foreach (var item in errores)
+                {
+                    Error += $"{item}\n";
+                }
                 AmigosControlador.Editar(a);
                 CambiarVista("amigos");
             }
+            
+            
 
             PropertyChange();
         }
