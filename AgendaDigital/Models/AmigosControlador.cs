@@ -121,7 +121,7 @@ namespace AgendaDigital.Models
         public  bool Validar(Amigo a, out List<string> errores)
         {
             errores = new();
-            if (string.IsNullOrWhiteSpace(a.Nombre))
+            if (string.IsNullOrEmpty(a.Nombre))
                     errores.Add("El nombre es obligatorio");
                 if (string.IsNullOrWhiteSpace(a.CorreoElectronico))
                     errores.Add("El correo electrónico es obligatorio");

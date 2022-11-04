@@ -20,7 +20,7 @@
             <Label>Nombre</Label>
             <TextBox Text="{Binding Amigo.Nombre}"></TextBox>
             <Label>Telefono</Label>
-            <TextBox Text="{Binding Amigo.Telefono}"></TextBox>
+            <TextBox Text="{Binding Amigo.Telefono}" MaxLength="10"></TextBox>
             <Label>Correo Electronico</Label>
             <TextBox Text="{Binding Amigo.CorreoElectronico}"></TextBox>
             <Label>Fecha de nacimiento</Label>
@@ -47,7 +47,7 @@
                     CANCELAR
                 </Button>
             </WrapPanel>
-            <TextBlock Text="{Binding Error}"></TextBlock>
+            <TextBlock Text="{Binding Error}" Foreground="#FF2E63"></TextBlock>
         </StackPanel>
     </StackPanel>
 </UserControl>

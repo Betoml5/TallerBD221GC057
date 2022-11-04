@@ -45,43 +45,28 @@ namespace AgendaDigital.ViewModels
             CancelarCommand = new  RelayCommand(Cancelar);
         }
 
-        //bool Validar(Amigo a, out ObservableCollection<string> errores)
-        //{
-
-
-        //    errores = Errores;
-        //    errores.Clear();
-        //    var numeroExiste = AmigosControlador.ListaAmigos.Any(amigo => amigo.Telefono == a.Telefono);
-        //    var correoExiste = AmigosControlador.ListaAmigos.Any(amigo => amigo.CorreoElectronico == a.CorreoElectronico);
-
-        //    if (string.IsNullOrWhiteSpace(a.Nombre))
-        //        errores.Add("El nombre es obligatorio");
-        //    if (string.IsNullOrWhiteSpace(a.CorreoElectronico))
-        //        errores.Add("El correo electrónico es obligatorio");
-        //    if (string.IsNullOrWhiteSpace(a.Telefono))
-        //        errores.Add("El telefono es obligatorio");
-        //    if  (string.IsNullOrEmpty(a.FechaNacimiento.ToString()))
-        //        errores.Add("La fecha de nacimiento es obligatoria");
-        //    if (a.FechaNacimiento > DateTime.Now)
-        //        errores.Add("La fecha de nacimiento no puede ser mayor a la fecha actual");
-        //    if (numeroExiste)
-        //        errores.Add("Ese numero de telefono ya existe");
-        //    if (correoExiste)
-        //        errores.Add("Ese correo electronico ya existe");
-        //    if (a.Telefono!=null && a.Telefono.Length > 10)
-        //        errores.Add("El tamaño maximo del numero telefono es de 10 digitos");
-
-        //    PropertyChange();
-        //    return errores.Count == 0;
-        //}
-
         void CambiarVista(string Vista)
         {
+            Error = "";
             this.Vista = Vista;
 
             if (Vista == "agregar")
             {
                 Amigo = new Amigo();
+            }
+
+            if (Vista == "detalles")
+            {
+                var clon = new Amigo()
+                {
+                    Id = Amigo.Id,
+                    Nombre = Amigo.Nombre,
+                    FechaNacimiento = Amigo.FechaNacimiento,
+                    Telefono = Amigo.Telefono,
+                    CorreoElectronico = Amigo.CorreoElectronico
+                };
+
+                Amigo = clon;
             }
 
 
@@ -93,6 +78,7 @@ namespace AgendaDigital.ViewModels
         {
             if (amigo != null)
             {
+                Error = "";
                 this.Amigo = amigo;
                 CambiarVista("detalles");
             }
@@ -100,17 +86,21 @@ namespace AgendaDigital.ViewModels
 
         public void Agregar(Amigo a)
         {
-
+            Error = "";
             if (AmigosControlador.Validar(a, out List<string> errores))
             {
 
-                foreach (var item in errores)
-                {
-                    Error += $"{item}\n";
-                }
+                
                 AmigosControlador.Crear(a);
                 CambiarVista("amigos");
             }
+
+            foreach (var item in errores)
+            {
+                Error += $"{item}\n";
+            }
+
+            PropertyChange();
         }
         public void BuscarPorId(Amigo a)
         {
@@ -141,15 +131,16 @@ namespace AgendaDigital.ViewModels
         {
             if (AmigosControlador.Validar(a, out List<string> errores))
             {
-                foreach (var item in errores)
-                {
-                    Error += $"{item}\n";
-                }
+              
                 AmigosControlador.Editar(a);
                 CambiarVista("amigos");
             }
-            
-            
+
+            foreach (var item in errores)
+            {
+               
+                Error += $"{item}\n";
+            }
 
             PropertyChange();
         }
@@ -158,6 +149,7 @@ namespace AgendaDigital.ViewModels
             {
                 this.Amigo = null;
                 CambiarVista("amigos");
+                
             }
 
             void PropertyChange(string? prop = null)
