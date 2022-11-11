@@ -14,5 +14,10 @@ namespace Productos.Models
         public string Nombre { get; set; } = null!;
 
         public virtual ICollection<Productos> Productos { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre.ToString();
+        }
     }
 }
