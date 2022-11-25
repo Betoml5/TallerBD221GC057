@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unidad6Desconectado", "Unid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Productos", "Productos\Productos.csproj", "{D326AF43-482D-4BF0-937C-9E68C61FC36C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pintores", "Pintores\Pintores.csproj", "{924BBC77-744E-4A37-B3AB-0BD9BAB95CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pintores", "Pintores\Pintores.csproj", "{924BBC77-744E-4A37-B3AB-0BD9BAB95CAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaDigitaldDesconectado", "AgendaDigitaldDesconectado\AgendaDigitaldDesconectado.csproj", "{FB2093DB-D32C-43DA-90BA-C9FA32E08C29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{924BBC77-744E-4A37-B3AB-0BD9BAB95CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{924BBC77-744E-4A37-B3AB-0BD9BAB95CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{924BBC77-744E-4A37-B3AB-0BD9BAB95CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB2093DB-D32C-43DA-90BA-C9FA32E08C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB2093DB-D32C-43DA-90BA-C9FA32E08C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB2093DB-D32C-43DA-90BA-C9FA32E08C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB2093DB-D32C-43DA-90BA-C9FA32E08C29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{CB1C83D5-4313-40C1-8DE9-7BED51BE7273} = {7B1D458C-EF21-4F3E-9894-5EFCA9C44082}
 		{D326AF43-482D-4BF0-937C-9E68C61FC36C} = {A1797FBC-3623-43AF-A7B3-C0AB41BF2D99}
 		{924BBC77-744E-4A37-B3AB-0BD9BAB95CAD} = {A1797FBC-3623-43AF-A7B3-C0AB41BF2D99}
+		{FB2093DB-D32C-43DA-90BA-C9FA32E08C29} = {A1797FBC-3623-43AF-A7B3-C0AB41BF2D99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38AF66CE-CF7E-4580-B4EE-11CB3244CC72}
