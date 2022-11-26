@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace AgendaDigital.Views
 {
     /// <summary>
-    /// Lógica de interacción para Amigos.xaml
+    /// Lógica de interacción para Agregar.xaml
     /// </summary>
-    public partial class Amigos : UserControl
+    public partial class Agregar : UserControl
     {
-        public Amigos()
+        public Agregar()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

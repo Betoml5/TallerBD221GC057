@@ -1,36 +1,107 @@
 ﻿using AgendaDigital.Models;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AgendaDigital.ViewModels
 {
-    public class AmigoViewModel
+    public class AmigoViewModel : INotifyPropertyChanged
     {
 
-        public AmigosControlador AmigosControlador { get; set; }  = new AmigosControlador();
-
+        public AmigosControlador AmigosControlador { get; set; } = new AmigosControlador();
+        public List<string> Errores { get; set; } = new List<string>();
+        public int PosicionSeleccionada { get; set; }
         public Amigo Amigo { get; set; }
         public string Error { get; set; } = "";
+
         public string Mensaje { get; set; } = "";
+        public string Vista { get; set; } = "amigos";
 
-        public void Crear(Amigo a)
+        int posicionInicial;
+
+        public ICommand CambiarVistaCommand { get; set; }
+        public ICommand AgregarAmigoCommand { get; set; }
+        public ICommand EliminarAmigoCommand { get; set; }
+
+        public ICommand EditarAmigoCommand { get; set; }
+        public ICommand DetallesAmigoCommand { get; set; }
+        public ICommand CancelarCommand { get; set; }
+        
+
+        public AmigoViewModel()
         {
-
-            if (string.IsNullOrWhiteSpace(a.Nombre)
-                || string.IsNullOrWhiteSpace(a.Telefono)
-                || string.IsNullOrWhiteSpace(a.CorreoElectronico))  
-            {
-                Error = "Faltan datos por rellenar";
-                return;
-            }
-
-            AmigosControlador.Crear(a);
+            CambiarVistaCommand = new RelayCommand<string>(CambiarVista);
+            AgregarAmigoCommand = new RelayCommand<Amigo>(Agregar);
+            EliminarAmigoCommand = new RelayCommand<Amigo>(Eliminar);
+            EditarAmigoCommand = new RelayCommand<Amigo>(Editar);
+            DetallesAmigoCommand = new RelayCommand<Amigo>(DetallesAmigo);
+            CancelarCommand = new  RelayCommand(Cancelar);
         }
 
+        void CambiarVista(string Vista)
+        {
+            Error = "";
+            this.Vista = Vista;
+
+            if (Vista == "agregar")
+            {
+                Amigo = new Amigo();
+            }
+
+            if (Vista == "detalles")
+            {
+                var clon = new Amigo()
+                {
+                    Id = Amigo.Id,
+                    Nombre = Amigo.Nombre,
+                    FechaNacimiento = Amigo.FechaNacimiento,
+                    Telefono = Amigo.Telefono,
+                    CorreoElectronico = Amigo.CorreoElectronico
+                };
+
+                Amigo = clon;
+            }
+
+
+            PropertyChange();
+        }
+
+
+        void DetallesAmigo(Amigo amigo)
+        {
+            if (amigo != null)
+            {
+                Error = "";
+                this.Amigo = amigo;
+                CambiarVista("detalles");
+            }
+        }
+
+        public void Agregar(Amigo a)
+        {
+            Error = "";
+            if (AmigosControlador.Validar(a, out List<string> errores))
+            {
+
+                
+                AmigosControlador.Crear(a);
+                CambiarVista("amigos");
+            }
+
+            foreach (var item in errores)
+            {
+                Error += $"{item}\n";
+            }
+
+            PropertyChange();
+        }
         public void BuscarPorId(Amigo a)
         {
             Amigo = AmigosControlador.BuscarPorId(a);
@@ -43,39 +114,50 @@ namespace AgendaDigital.ViewModels
                 Mensaje = "¡No se encontro el amigo!";
             }
         }
-
         public void Eliminar(Amigo a)
         {
-            int filasAfectadas = AmigosControlador.Borrar(a);
-            if (filasAfectadas > 0)
+            if (a != null)
             {
-                Mensaje = "¡Eliminado Satisfactoriamente!";
-            }
-            else
-            {
-                Mensaje = "¡Hubo un error al intentar eliminar el amigo";
+                int filasAfectadas = AmigosControlador.Borrar(a);
+
+                if (filasAfectadas > 0)
+                {
+                    Mensaje = "¡Eliminado Satisfactoriamente!";
+                }
+                
             }
         }
-
         public void Editar(Amigo a)
         {
-            if (string.IsNullOrWhiteSpace(a.Nombre) || 
-                string.IsNullOrWhiteSpace(a.Telefono) ||
-                string.IsNullOrWhiteSpace(a.CorreoElectronico))
+            if (AmigosControlador.Validar(a, out List<string> errores))
             {
-                Error = "¡Hay campos vacios!";
-                return;
+              
+                AmigosControlador.Editar(a);
+                CambiarVista("amigos");
             }
-            int filasAfectadas = AmigosControlador.Editar(a);
-            if (filasAfectadas > 0)
+
+            foreach (var item in errores)
             {
-                Mensaje = "¡Amigo editado correctamente!";
+               
+                Error += $"{item}\n";
             }
-            else
-            {
-                Error = "¡Hubi un error a la hora de editar el amigo!";
-            }
+
+            PropertyChange();
         }
+
+            void Cancelar()
+            {
+                this.Amigo = null;
+                CambiarVista("amigos");
+                
+            }
+
+            void PropertyChange(string? prop = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            }
         
+
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

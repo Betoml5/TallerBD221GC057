@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AgendaDigital.Views
+namespace Ferretera.Views
 {
     /// <summary>
-    /// Lógica de interacción para Amigos.xaml
+    /// Lógica de interacción para Productos.xaml
     /// </summary>
-    public partial class Amigos : UserControl
+    public partial class Productos : Window
     {
-        public Amigos()
+        public Productos()
         {
             InitializeComponent();
         }

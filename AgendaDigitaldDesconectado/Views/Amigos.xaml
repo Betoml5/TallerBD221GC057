@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AgendaDigital.Views" xmlns:viewmodels="clr-namespace:AgendaDigital.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AmigoViewModel}"
+        xmlns:local="clr-namespace:AgendaDigital.Views" 
              mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -33,9 +33,8 @@
                      Foreground="#fff"
                      FontWeight="Bold" Margin="10"
                      Grid.Column="0"
-                     ItemsSource="{Binding AmigosControlador.ListaAmigos}"
+                     ItemsSource="{Binding Amigos}"          
                      SelectedIndex="{Binding PosicionSeleccionada}"
-                         
                      >
                 </ListBox>
             </Border>
@@ -45,7 +44,7 @@
                     Foreground="#fff" Padding="8"
                     FontWeight="Bold"
                     Command="{Binding CambiarVistaCommand}"
-                    CommandParameter="agregar">
+                    CommandParameter="crear">
                     AGREGAR NUEVO AMIGO
             </Button>
             
@@ -84,7 +83,7 @@
 
                     <TextBlock  >
                         Fecha de nacimiento:
-                     <TextBlock Style="{StaticResource m}" Text="{Binding ElementName=lstAmigos, StringFormat=d, Path=SelectedItem.FechaNacimiento}"> 
+                     <TextBlock Style="{StaticResource m}" Text="{Binding ElementName=lstAmigos, StringFormat=d, Path=SelectedItem.Fechanacimiento}"> 
                         </TextBlock>
                     </TextBlock>
 
@@ -93,7 +92,7 @@
                                 Background="#FF2E63"
                                 Padding="8" 
                                 Foreground="#fff"
-                                Command="{Binding EliminarAmigoCommand}"
+                                Command="{Binding EliminarCommand}"
                                 CommandParameter="{Binding ElementName=lstAmigos, Path=SelectedItem}"
                                 >
                             Eliminar</Button>
@@ -101,7 +100,7 @@
                                 Background="#08D9D6"
                                 Padding="8" 
                                 Foreground="#fff"
-                                Command="{Binding DetallesAmigoCommand}"
+                                Command="{Binding DetallesAmigosCommand}"
                                 CommandParameter="{Binding ElementName=lstAmigos, Path=SelectedItem}"
                                 >
                             Ver detalles</Button>

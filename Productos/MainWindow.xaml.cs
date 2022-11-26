@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AgendaDigital.Views
+namespace Productos
 {
     /// <summary>
-    /// Lógica de interacción para Amigos.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Amigos : UserControl
+    public partial class MainWindow : Window
     {
-        public Amigos()
+        public MainWindow()
         {
             InitializeComponent();
         }

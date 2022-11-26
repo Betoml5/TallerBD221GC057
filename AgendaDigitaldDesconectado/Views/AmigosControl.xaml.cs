@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AgendaDigital.Views
 {
     /// <summary>
-    /// Lógica de interacción para Amigos.xaml
+    /// Lógica de interacción para AmigosControl.xaml
     /// </summary>
-    public partial class Amigos : UserControl
+    public partial class AmigosControl : Window
     {
-        public Amigos()
+        public AmigosControl()
         {
             InitializeComponent();
         }

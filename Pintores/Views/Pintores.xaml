@@ -1,0 +1,47 @@
+﻿<Window x:Class="Pintores.Views.Pintores"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mv="clr-namespace:Pintores.ViewModels" xmlns:img="clr-namespace:Pintores.Helpers"
+        mc:Ignorable="d"
+        Title="Pintores" Height="450" Width="800">
+    <Window.Resources>
+        <img:IdToImageConverter x:Key="idToImg"></img:IdToImageConverter>
+    </Window.Resources>
+    <Window.DataContext>
+        <mv:PintoresViewModel></mv:PintoresViewModel>
+    </Window.DataContext>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" Padding="0,10">Lista Pintores</TextBlock>
+        <ListBox ItemsSource="{Binding Pintores}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="5"></UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel >
+                        <Image Source="{Binding Id, Converter={StaticResource idToImg}}" 
+                               Width="250" Height="250"
+                               Margin="20"
+                               HorizontalAlignment="Center" Stretch="UniformToFill"></Image>
+                        <TextBlock Text="{Binding Nombre}"></TextBlock>
+                        <TextBlock Text="{Binding Pais}"></TextBlock>
+                        <TextBlock Text="{Binding Ciudad}"></TextBlock>
+                        <TextBlock Text="{Binding FechaNacimiento, StringFormat=d}">
+                            <Run Text="{Binding FechaFallecimiento, StringFormat=d}"></Run>
+                        </TextBlock>
+
+
+
+
+
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</Window>

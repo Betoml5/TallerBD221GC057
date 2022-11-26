@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AgendaDigital.Views
 {
     /// <summary>
-    /// Lógica de interacción para Amigos.xaml
+    /// Lógica de interacción para AmigoDetalles.xaml
     /// </summary>
-    public partial class Amigos : UserControl
+    public partial class AmigoDetalles : UserControl
     {
-        public Amigos()
+        public AmigoDetalles()
         {
             InitializeComponent();
         }

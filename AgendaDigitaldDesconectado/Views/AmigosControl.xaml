@@ -3,17 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AgendaDigital.Views" xmlns:viewmodels="clr-namespace:AgendaDigital.ViewModels"
+        xmlns:local="clr-namespace:AgendaDigital.Views" xmlns:viewmodels="clr-namespace:AgendaDigitaldDesconectado.ViewModels"
         mc:Ignorable="d"
         Title="AmigosControl" Height="650" Width="800">
     <DockPanel>
         <ContentControl>
             <ContentControl.DataContext>
-                <viewmodels:AmigoViewModel x:Name="amigosvm"></viewmodels:AmigoViewModel>
+                <viewmodels:AgendaViewModel></viewmodels:AgendaViewModel>
             </ContentControl.DataContext>
             <ContentControl.Resources>
                 <local:Amigos x:Key="amigos"></local:Amigos>
-                <local:Agregar x:Key="agregar"></local:Agregar>
+                <local:Agregar x:Key="crear"></local:Agregar>
                 <local:AmigoDetalles x:Key="detalles"></local:AmigoDetalles>
             </ContentControl.Resources>
 
@@ -23,8 +23,8 @@
                         <DataTrigger Binding="{Binding Vista}" Value="amigos">
                             <Setter Property="Content" Value="{StaticResource amigos}" ></Setter>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Vista}" Value="agregar">
-                            <Setter Property="Content" Value="{StaticResource agregar}"></Setter>
+                        <DataTrigger Binding="{Binding Vista}" Value="crear">
+                            <Setter Property="Content" Value="{StaticResource crear}"></Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Vista}" Value="detalles">
                             <Setter Property="Content" Value="{StaticResource detalles}"></Setter>
