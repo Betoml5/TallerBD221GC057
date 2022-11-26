@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eje1paises", "Eje1paises\Ej
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ferretera", "Ferretera\Ferretera.csproj", "{C4655715-A546-40B9-B39D-F5D06D95B9E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaDigital", "AgendaDigital\AgendaDigital.csproj", "{CB1C83D5-4313-40C1-8DE9-7BED51BE7273}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaDigital", "AgendaDigital\AgendaDigital.csproj", "{CB1C83D5-4313-40C1-8DE9-7BED51BE7273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

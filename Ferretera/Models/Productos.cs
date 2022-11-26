@@ -12,14 +12,20 @@ namespace Ferretera.Models
     {
         public ObservableCollection<Producto> ListaProductos { get; set; } = new ObservableCollection<Producto>();
         public List<Seccion> ListaSecciones { get; set; } = new List<Seccion>();
-
+        
+        private int myVar;
         public decimal PromedioPrecio { get; set; } = 0;
+       
+
+        
+
+
         public decimal PromedioSeccion { get; set; } = 0;
 
-
         MySqlConnection conexion { get; set; }
-         MySqlCommand commandoSQL { get; set; }
-         MySqlDataReader lector { get; set; }
+        MySqlCommand commandoSQL { get; set; }
+        MySqlDataReader lector { get; set; }
+        
         public Productos()
         {
             //Establecer los pasos de la conexion
