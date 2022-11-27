@@ -22,6 +22,8 @@ namespace AgendaDigitaldDesconectado.ViewModels
 
         public int PosicionSeleccionada { get; set; }
 
+        public string Error { get; set; }
+
         public ICommand CrearCommand { get; set; }
         public ICommand CambiarVistaCommand { get; set; } 
         public ICommand DetallesAmigosCommand { get; set; }
@@ -49,16 +51,39 @@ namespace AgendaDigitaldDesconectado.ViewModels
         }
         public void Crear(Amigos amigo)
         {
-            CRUD.Crear(amigo);
-            CambiarVista("amigos");
-            ActualizarBD();
+            if (CRUD.Validar(amigo, out List<string> Errores))
+            {
+                CRUD.Crear(amigo);
+                CambiarVista("amigos");
+                ActualizarBD();
+            }
+
+            foreach (var item in Errores)
+            {
+                Error = $"{Error} {item} {Environment.NewLine}";
+            }
+
+            PropertyChange();
+
         }
 
         public void Actualizar(Amigos amigo)
         {
-            CRUD.Actualizar(amigo);
+            if (CRUD.Validar(amigo, out List<string> Errores))
+            {
+                CRUD.Actualizar(amigo);
+                ActualizarBD();
+                CambiarVista("amigos");
+            }
+
+            foreach (var item in Errores)
+            {
+                Error = $"{Error} {item} {Environment.NewLine}";
+            }
+
+            PropertyChange();
             
-            ActualizarBD();
+
         }
 
         public void Eliminar(Amigos amigo)
@@ -95,6 +120,7 @@ namespace AgendaDigitaldDesconectado.ViewModels
 
         void CambiarVista(string vista)
         {
+            Error = "";
             this.Vista = vista;
 
             if (vista == "crear")

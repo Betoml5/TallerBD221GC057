@@ -32,6 +32,12 @@ namespace Anime_CRUD.ViewModels
             
         }
 
+
+        public void ViewAnimeDetails()
+        {
+            ChangeView("details");
+        }
+        
         public void Create(Anime Anime)
         {
             if (crud.Validate(Anime, out List<string> errors))

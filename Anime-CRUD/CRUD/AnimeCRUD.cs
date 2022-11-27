@@ -47,6 +47,8 @@ namespace Anime_CRUD.CRUD
 
         public IEnumerable<Anime> Read()
         {
+
+           
             return context.Anime.ToList();
         }
 
