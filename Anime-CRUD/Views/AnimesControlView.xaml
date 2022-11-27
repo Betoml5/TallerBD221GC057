@@ -1,0 +1,29 @@
+﻿<Window x:Class="Anime_CRUD.Views.AnimesControlView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Anime_CRUD.Views" xmlns:viewmodels="clr-namespace:Anime_CRUD.ViewModels"
+        mc:Ignorable="d"
+        Title="AnimesControlView" Height="450" Width="800">
+    <DockPanel Background="#404258">
+        <ContentControl>
+            <ContentControl.DataContext>
+                <viewmodels:AnimeViewModel />
+            </ContentControl.DataContext>
+            <ContentControl.Resources>
+                <local:HomeView x:Key="home"/>
+            </ContentControl.Resources>
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding View}" Value="home">
+                            <Setter Property="Content" Value="{StaticResource home}" ></Setter>
+                        </DataTrigger>
+                  
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </DockPanel>
+</Window>
