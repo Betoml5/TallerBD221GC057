@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Anime_CRUD.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
-    <DockPanel Background="#404258">
+    <DockPanel Background="#474E68">
         <DockPanel.Resources>
             <Style TargetType="TextBlock">
                 <!--<Setter Property="FontFamily" Value=""></Setter>-->
@@ -30,165 +30,63 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Bottom">
-            <WrapPanel VerticalAlignment="Center" >
-                <TextBlock 
+            <Border CornerRadius="28" Margin="20" Background="#2B2E4A">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                </Border.BitmapEffect>
+                <WrapPanel VerticalAlignment="Center" >
+
+                    <TextBlock 
                 FontFamily="../Assets/Font/#Roboto-Bold"
                 Foreground="#A5C9CA"
-                FontWeight="bold"
+                FontWeight="SemiBold"
                 Margin="20"
                 FontSize="28"
-                >Tus animes</TextBlock>
-                <Button Height="30" Width="30" Cursor="Hand" BorderBrush="Transparent"   Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="../Assets/add.png" />
-                    </Button.Background>
-                    <Button.BitmapEffect>
-                        <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                    </Button.BitmapEffect>
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="8"/>
-                        </Style>
-                    </Button.Resources>
-                  
-                </Button>
-            </WrapPanel>
-            <ListBox DockPanel.Dock="Bottom" Background="#474E68" BorderThickness="0" Padding="0,20">
+                >Mi Lista</TextBlock>
+                    <Button Height="30" Width="30" Cursor="Hand" BorderBrush="Transparent"   Padding="8" FontSize="12" Foreground="white" Command="{Binding ChangeViewCommand}" CommandParameter="create" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="../Assets/add.png" />
+                        </Button.Background>
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                        </Button.BitmapEffect>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+
+                    </Button>
+                </WrapPanel>
+            </Border>
+            <ListBox DockPanel.Dock="Bottom" Background="#474E68" BorderThickness="0" Padding="0,20" ItemsSource="{Binding Animes}">
                
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
-                <ListBoxItem>
-                    <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                        <StackPanel >
-                            <Image Height="100" Width="150" Source="https://m.media-amazon.com/images/M/MV5BN2FlYjYxMTMtZGQzYy00OWU2LTkyYWMtNWJhODhmZmM0N2FhXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="Black Clover" Margin="0,5"></TextBlock>
-                            <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                <Button.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                </Button.BitmapEffect>
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="8"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                        <StackPanel >
-                            <Image Height="100" Width="150" Source="https://m.media-amazon.com/images/M/MV5BN2FlYjYxMTMtZGQzYy00OWU2LTkyYWMtNWJhODhmZmM0N2FhXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="Black Clover" Margin="0,5"></TextBlock>
-                            <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                <Button.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                </Button.BitmapEffect>
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="8"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                        <StackPanel >
-                            <Image Height="100" Width="150" Source="https://m.media-amazon.com/images/M/MV5BN2FlYjYxMTMtZGQzYy00OWU2LTkyYWMtNWJhODhmZmM0N2FhXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="Black Clover" Margin="0,5"></TextBlock>
-                            <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                <Button.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                </Button.BitmapEffect>
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="8"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                        <StackPanel >
-                            <Image Height="100" Width="150" Source="https://m.media-amazon.com/images/M/MV5BN2FlYjYxMTMtZGQzYy00OWU2LTkyYWMtNWJhODhmZmM0N2FhXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="Black Clover" Margin="0,5"></TextBlock>
-                            <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                <Button.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                </Button.BitmapEffect>
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="8"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                        <StackPanel >
-                            <Image Height="100" Width="150" Source="https://m.media-amazon.com/images/M/MV5BN2FlYjYxMTMtZGQzYy00OWU2LTkyYWMtNWJhODhmZmM0N2FhXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="Black Clover" Margin="0,5"></TextBlock>
-                            <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                <Button.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                </Button.BitmapEffect>
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="8"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                        <StackPanel >
-                            <Image Height="100" Width="150" Source="https://m.media-amazon.com/images/M/MV5BN2FlYjYxMTMtZGQzYy00OWU2LTkyYWMtNWJhODhmZmM0N2FhXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="Black Clover" Margin="0,5"></TextBlock>
-                            <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                <Button.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                </Button.BitmapEffect>
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="8"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-
-                </ListBoxItem>
-                <!--<ListBox.ItemTemplate>
+               
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
-                            <StackPanel >
-                                <Image Height="100" Width="150" Source="{Binding Image}" />
-                                <TextBlock FontFamily="../Assets/#Futura Display BQ" Foreground="#000" TextAlignment="Center" FontSize="18" Text="{Binding Name}"></TextBlock>
-                                <Button BorderBrush="Transparent" Background="#1a2865" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewHeroDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
-                                    <Button.BitmapEffect>
-                                        <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                                    </Button.BitmapEffect>
-                                    <Button.Resources>
-                                        <Style TargetType="Border">
-                                            <Setter Property="CornerRadius" Value="8"/>
-                                        </Style>
-                                    </Button.Resources>
-                                </Button>
-                            </StackPanel>
-                        </Border>
+                        <StackPanel >
+                            <Image Height="100" Width="150" Source="{Binding Imagen}" />
+                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="{Binding Nombre}" Margin="0,5"></TextBlock>
+                                <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewAnimeDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
+                                <Button.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                                </Button.BitmapEffect>
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </StackPanel>
+                    </Border>
                     </DataTemplate>
-                </ListBox.ItemTemplate>-->
+                </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
     </DockPanel>
