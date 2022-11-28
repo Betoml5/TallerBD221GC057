@@ -9,5 +9,7 @@ namespace Anime_CRUD.Models
         public string Nombre { get; set; } = null!;
         public int Capitulos { get; set; }
         public string Autor { get; set; } = null!;
+
+        public string Imagen { get; set; } = null!;
     }
 }

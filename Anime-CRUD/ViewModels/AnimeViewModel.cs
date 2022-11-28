@@ -1,5 +1,6 @@
 ﻿using Anime_CRUD.CRUD;
 using Anime_CRUD.Models;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,12 +8,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Anime_CRUD.ViewModels
 {
     public class AnimeViewModel:INotifyPropertyChanged
     {
-        ObservableCollection<Anime> Animes = new ObservableCollection<Anime>();
+        public ObservableCollection<Anime> Animes { get; set; } = new ObservableCollection<Anime>();
         AnimesContext context = new AnimesContext();
         AnimeCRUD crud = new AnimeCRUD();
 
@@ -22,8 +24,27 @@ namespace Anime_CRUD.ViewModels
 
         public string View { get; set; } = "home";
 
+
+        //Commands
+        public ICommand ChangeViewCommand { get; set; }
+
+        public ICommand CreateCommand { get; set; }
+
+        public ICommand ViewAnimeDetailsCommand { get; set; }
+
+        public ICommand DeleteCommand { get; set; }
+
+        public ICommand UpdateCommand { get; set; }
+
         public AnimeViewModel()
         {
+
+            ChangeViewCommand = new RelayCommand<string>(ChangeView);
+            CreateCommand = new RelayCommand(Create);
+            ViewAnimeDetailsCommand = new RelayCommand<Anime>(ViewAnimeDetails);
+            DeleteCommand = new RelayCommand(Delete);
+            UpdateCommand = new RelayCommand(Update);
+
             var animes = crud.Read();
             foreach (var anime in animes)
             {
@@ -33,17 +54,19 @@ namespace Anime_CRUD.ViewModels
         }
 
 
-        public void ViewAnimeDetails()
+        public void ViewAnimeDetails(Anime Anime)
         {
+            this.Anime = Anime;
             ChangeView("details");
         }
         
-        public void Create(Anime Anime)
+        public void Create()
         {
             if (crud.Validate(Anime, out List<string> errors))
             {
                 crud.Create(Anime);
-                Animes.Add(Anime);
+                UpdateDB();
+                ChangeView("home");
                 Anime = null;
             }
             else
@@ -54,7 +77,7 @@ namespace Anime_CRUD.ViewModels
             PropertyChange();
         }
 
-        public void Update(Anime Anime)
+        public void Update()
         {
             if (crud.Validate(Anime, out List<string> errors))
             {
@@ -68,11 +91,12 @@ namespace Anime_CRUD.ViewModels
             PropertyChange();
         }
 
-        public void Delete(Anime Anime)
+        public void Delete()
         {
             crud.Delete(Anime);
-            Animes.Remove(Anime);
             Anime = null;
+            UpdateDB();
+            ChangeView("home");
             PropertyChange();
         }
 
@@ -90,7 +114,14 @@ namespace Anime_CRUD.ViewModels
 
         public void ChangeView(string View)
         {
+            Error = "";
             this.View = View;
+
+            if (View == "create")
+            {
+                 Anime = new Anime();
+            }
+            
             PropertyChange();
         }
         void PropertyChange(string? prop = null)

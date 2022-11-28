@@ -39,6 +39,8 @@ namespace Anime_CRUD.Models
                 entity.Property(e => e.Autor).HasMaxLength(50);
 
                 entity.Property(e => e.Nombre).HasMaxLength(50);
+
+                entity.Property(e => e.Imagen).HasMaxLength(250);
             });
 
             OnModelCreatingPartial(modelBuilder);

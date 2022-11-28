@@ -32,6 +32,11 @@ namespace Anime_CRUD.CRUD
                 errors.Add("El anime debe tener un autor");
             }
 
+            if (!Uri.TryCreate(Anime.Imagen, UriKind.Absolute, out var uri))
+            {
+                errors.Add("Ingresa una url valida");
+            }
+
             Errors = errors;
 
             return errors.Count == 0;
@@ -47,9 +52,7 @@ namespace Anime_CRUD.CRUD
 
         public IEnumerable<Anime> Read()
         {
-
-           
-            return context.Anime.ToList();
+            return context.Anime.OrderBy(Anime => Anime.Nombre);
         }
 
         public void ReadOne()

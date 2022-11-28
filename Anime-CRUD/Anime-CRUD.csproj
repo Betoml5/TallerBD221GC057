@@ -10,10 +10,10 @@
 
   <ItemGroup>
     <None Remove="Assets\add.png" />
+    <None Remove="Assets\arrow.png" />
     <None Remove="Assets\blackclover.jpg" />
     <None Remove="Assets\Fonts\Montserrat-Bold.ttf" />
     <None Remove="Assets\Fonts\Montserrat-Regular.ttf" />
-    <None Remove="Assets\Fonts\Roboto-Bold.ttf" />
     <None Remove="Assets\Fonts\Roboto-Regular.ttf" />
   </ItemGroup>
 
@@ -22,11 +22,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\add.png" />
+    <Resource Include="Assets\arrow.png" />
     <Resource Include="Assets\blackclover.jpg" />
     <Resource Include="Assets\Fonts\Montserrat-Bold.ttf" />
     <Resource Include="Assets\Fonts\Montserrat-Regular.ttf" />

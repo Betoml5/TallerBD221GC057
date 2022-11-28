@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anime_CRUD.Views" xmlns:viewmodels="clr-namespace:Anime_CRUD.ViewModels"
         mc:Ignorable="d"
-        Title="AnimesControlView" Height="550" Width="800">
+        Title="AnimesControlView" Height="600" Width="800">
     <DockPanel Background="#404258">
         <ContentControl>
             <ContentControl.DataContext>
-                <viewmodels:AnimeViewModel />
+                <viewmodels:AnimeViewModel x:Name="vm"/>
             </ContentControl.DataContext>
             <ContentControl.Resources>
                 <local:HomeView x:Key="home"/>
+                <local:CreateAnimeView x:Key="create"/>
+                <local:AnimeDetailsView x:Key="details"/>
+                <local:EditAnimeView x:Key="edit"/>
+
+
             </ContentControl.Resources>
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
@@ -20,7 +25,15 @@
                         <DataTrigger Binding="{Binding View}" Value="home">
                             <Setter Property="Content" Value="{StaticResource home}" ></Setter>
                         </DataTrigger>
-                  
+                        <DataTrigger Binding="{Binding View}" Value="create">
+                            <Setter Property="Content" Value="{StaticResource create}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding View}" Value="details">
+                            <Setter Property="Content" Value="{StaticResource details}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding View}" Value="edit">
+                            <Setter Property="Content" Value="{StaticResource edit}"></Setter>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </ContentControl.Style>

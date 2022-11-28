@@ -5,8 +5,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Anime_CRUD.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="600" d:DesignWidth="800">
+    <StackPanel Background="#404258" VerticalAlignment="Center">
+        <StackPanel.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="../Assets/Fonts/#Roboto-Bold"></Setter>
+            </Style>
+        </StackPanel.Resources>
+        <Button 
+                Width="30" Height="30" Margin="0,20,300,0"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                Command="{Binding ChangeViewCommand}"
+                CommandParameter="home">
+            <Button.Background>
+                <ImageBrush  ImageSource="../Assets/arrow.png" />
+            </Button.Background>
+
+        </Button>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30">
+            <Image Height="250" Width="250" Source="{Binding Anime.Imagen}" />
+            <TextBlock 
+                FontFamily="../Assets/#Roboto-Bold" 
+                FontWeight="Bold" Foreground="#A5C9CA" 
+                TextAlignment="Center" FontSize="18" 
+                Text="{Binding Anime.Nombre}" Margin="0,10"
+                ></TextBlock>
+            <TextBlock 
+                TextAlignment="Center" Foreground="#A5C9CA" 
+                FontSize="20" FontStyle="Italic" Text="{Binding Anime.Autor}" ></TextBlock>
+        </StackPanel>
+        <WrapPanel HorizontalAlignment="Center">
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Padding" Value="10"></Setter>
+                </Style>
+            </WrapPanel.Resources>
+            <Button Cursor="Hand" Background="#E84545"
+                    Foreground="#fff" FontWeight="Bold"
+                    Command="{Binding DeleteCommand}">Eliminar</Button>
+            <Button Cursor="Hand" Background="#2B2E4A"
+                    Foreground="#fff" FontWeight="Bold"
+                    Margin="10,0,0,0"
+                    Command="{Binding ChangeViewCommand}"
+                    CommandParameter="edit"
+                    >Editar</Button>
+        </WrapPanel>
+    </StackPanel>
 </UserControl>
