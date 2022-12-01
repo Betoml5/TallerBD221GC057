@@ -30,10 +30,8 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Bottom">
-            <Border CornerRadius="28" Margin="20" Background="#2B2E4A">
-                <Border.BitmapEffect>
-                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                </Border.BitmapEffect>
+            <Border   Background="#2B2E4A">
+                
                 <WrapPanel VerticalAlignment="Center" >
 
                     <TextBlock 
@@ -57,6 +55,40 @@
                         </Button.Resources>
 
                     </Button>
+
+                    <DockPanel Margin="370,0,0,0">
+                        <TextBox BorderThickness="0" BorderBrush="Transparent" Width="150" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Name="searchTerm" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}" Padding="4" >
+                        </TextBox>
+                        <Button Height="30" Width="30" Margin="0,0,10,0" Cursor="Hand" BorderBrush="Transparent"   Padding="8" FontSize="12" Foreground="white" Command="{Binding FindByNameCommand}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="../Assets/search.png" />
+                            </Button.Background>
+                            <Button.BitmapEffect>
+                                <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                            </Button.BitmapEffect>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="8"/>
+                                </Style>
+                            </Button.Resources>
+
+                        </Button>
+                        <Button Height="30" Width="30" Cursor="Hand" BorderBrush="Transparent"   Padding="8" FontSize="12" Foreground="white" Command="{Binding ResetAnimesCommand}"  >
+                            <Button.Background>
+                                <ImageBrush ImageSource="../Assets/undo-arrow.png" />
+                            </Button.Background>
+                            <Button.BitmapEffect>
+                                <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                            </Button.BitmapEffect>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="8"/>
+                                </Style>
+                            </Button.Resources>
+
+                        </Button>
+                    </DockPanel>
+                   
                 </WrapPanel>
             </Border>
             <ListBox DockPanel.Dock="Bottom" Background="#474E68" BorderThickness="0" Padding="0,20" ItemsSource="{Binding Animes}">
@@ -72,8 +104,8 @@
                         <Border  CornerRadius="999" Padding="12" BorderThickness="0" BorderBrush="Transparent" Cursor="Hand">
                         <StackPanel >
                             <Image Height="100" Width="150" Source="{Binding Imagen}" />
-                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="Bold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="{Binding Nombre}" Margin="0,5"></TextBlock>
-                                <Button BorderBrush="Transparent" Background="#395B64" Content="Detalles"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewAnimeDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
+                            <TextBlock FontFamily="../Assets/#Roboto-Bold" FontWeight="SemiBold" Foreground="#A5C9CA" TextAlignment="Center" FontSize="18" Text="{Binding Nombre}" Margin="0,8"></TextBlock>
+                                <Button BorderBrush="Transparent" Background="#395B64" Content="VER" FontWeight="bold"  Padding="8" FontSize="12" Foreground="white" Command="{Binding DataContext.ViewAnimeDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding .}">
                                 <Button.BitmapEffect>
                                     <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
                                 </Button.BitmapEffect>

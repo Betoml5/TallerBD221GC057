@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,13 @@ namespace AgendaDigital.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "Todos los archivos de imagenes | *.jpg *.png *.jpeg";
+            if (file.ShowDialog() == true)
+            {
+                var txtImagen = file.FileName;
+                
+            }
         }
     }
 }

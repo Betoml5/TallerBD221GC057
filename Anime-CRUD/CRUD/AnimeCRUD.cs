@@ -55,10 +55,14 @@ namespace Anime_CRUD.CRUD
             return context.Anime.OrderBy(Anime => Anime.Nombre);
         }
 
-        public void ReadOne()
+        public IEnumerable<Anime> FindByName(string name)
+        {
+            return context.Anime.Where(Anime => Anime.Nombre.Contains(name));
+        }
+        public Anime ReadOne(int Id)
         {
 
-
+            return context.Anime.Find(Id);
 
         }
 

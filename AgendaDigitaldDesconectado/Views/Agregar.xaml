@@ -25,10 +25,15 @@
             <TextBox Text="{Binding Amigo.CorreoElectronico}"></TextBox>
             <Label>Fecha de nacimiento</Label>
 
+
             <DatePicker 
                 SelectedDate="{Binding Amigo.Fechanacimiento, StringFormat=d}" 
                 DisplayDate="{Binding DataTime.Now}"
                 ></DatePicker>
+
+            <Label>Seleccionar imagen</Label>
+            <TextBox Text="{Binding Image, UpdateSourceTrigger=PropertyChanged}" Margin="0,10" Name="txtImagen"></TextBox>
+            <Button Click="Button_Click" Padding="10">Examinar</Button>
             <WrapPanel HorizontalAlignment="Right" Margin="0,10">
                 <Button
                     Background="#252A34" Foreground="#fff" 

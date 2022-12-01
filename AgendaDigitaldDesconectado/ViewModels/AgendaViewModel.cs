@@ -24,6 +24,18 @@ namespace AgendaDigitaldDesconectado.ViewModels
 
         public string Error { get; set; }
 
+        private string rutaImagen;
+
+        public string Imagen
+        {
+            get { return rutaImagen; }
+            set { rutaImagen = value;
+                PropertyChange("Imagen");
+            }
+
+        }
+
+
         public ICommand CrearCommand { get; set; }
         public ICommand CambiarVistaCommand { get; set; } 
         public ICommand DetallesAmigosCommand { get; set; }

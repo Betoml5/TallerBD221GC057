@@ -15,6 +15,8 @@
     <None Remove="Assets\Fonts\Montserrat-Bold.ttf" />
     <None Remove="Assets\Fonts\Montserrat-Regular.ttf" />
     <None Remove="Assets\Fonts\Roboto-Regular.ttf" />
+    <None Remove="Assets\search.png" />
+    <None Remove="Assets\undo-arrow.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,8 @@
     <Resource Include="Assets\Fonts\Montserrat-Regular.ttf" />
     <Resource Include="Assets\Fonts\Roboto-Bold.ttf" />
     <Resource Include="Assets\Fonts\Roboto-Regular.ttf" />
+    <Resource Include="Assets\search.png" />
+    <Resource Include="Assets\undo-arrow.png" />
   </ItemGroup>
 
 </Project>

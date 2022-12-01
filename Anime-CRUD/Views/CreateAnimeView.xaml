@@ -3,13 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-<<<<<<< HEAD
-             xmlns:local="clr-namespace:Anime_CRUD.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#404258">
-            
-=======
              xmlns:local="clr-namespace:Anime_CRUD.Views" xmlns:viewmodels="clr-namespace:Anime_CRUD.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AnimeViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
@@ -92,8 +85,7 @@
             <TextBlock Text="{Binding Error}" Foreground="#E84545" FontWeight="Bold" FontSize="14" Margin="10"/>
         </StackPanel>
 
-        <Image Width="300" Height="300" Grid.Column="1" Grid.Row="1" Source="https://www.clipartmax.com/png/full/280-2809765_gon-freecss-chibi-by-chris-the-ninjer-hunter-x-hunter-gon-chibi.png"/>
+        <Image Width="300" Height="300" Grid.Column="1" Grid.Row="1" Source="{Binding Anime.Imagen, UpdateSourceTrigger=PropertyChanged}"/>
 
->>>>>>> a46b53c7f24451c3418f018776c8654548affd11
     </Grid>
 </UserControl>

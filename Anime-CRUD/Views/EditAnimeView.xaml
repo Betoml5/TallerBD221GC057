@@ -50,7 +50,7 @@
                 BorderBrush="Transparent"
                 Cursor="Hand"
                 Command="{Binding ChangeViewCommand}"
-                CommandParameter="home">
+                CommandParameter="details">
             <Button.Background>
                 <ImageBrush  ImageSource="../Assets/arrow.png" />
             </Button.Background>

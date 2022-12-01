@@ -24,17 +24,18 @@ namespace Anime_CRUD.ViewModels
 
         public string View { get; set; } = "home";
 
+        public string SearchTerm { get; set; } 
+
 
         //Commands
         public ICommand ChangeViewCommand { get; set; }
-
         public ICommand CreateCommand { get; set; }
-
         public ICommand ViewAnimeDetailsCommand { get; set; }
-
         public ICommand DeleteCommand { get; set; }
-
         public ICommand UpdateCommand { get; set; }
+        public ICommand ResetAnimesCommand { get; set; }
+
+        public ICommand FindByNameCommand { get; set; }
 
         public AnimeViewModel()
         {
@@ -44,6 +45,8 @@ namespace Anime_CRUD.ViewModels
             ViewAnimeDetailsCommand = new RelayCommand<Anime>(ViewAnimeDetails);
             DeleteCommand = new RelayCommand(Delete);
             UpdateCommand = new RelayCommand(Update);
+            FindByNameCommand = new RelayCommand(FindByName);
+            ResetAnimesCommand = new RelayCommand(ResetAnimes);
 
             var animes = crud.Read();
             foreach (var anime in animes)
@@ -52,7 +55,33 @@ namespace Anime_CRUD.ViewModels
             }
             
         }
+        
+        private void ResetAnimes()
+        {
+            Animes.Clear();
+            var animes = crud.Read();
+            foreach (var anime in animes)
+            {
+                Animes.Add(anime);
+            }
+        }
 
+        public void FindByName()
+        {
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                var animes = crud.FindByName(SearchTerm);
+                Animes.Clear();
+                foreach (var anime in animes)
+                {
+                    Animes.Add(anime);
+                }
+            }
+            
+
+            PropertyChange();
+
+        }
 
         public void ViewAnimeDetails(Anime Anime)
         {
@@ -79,14 +108,29 @@ namespace Anime_CRUD.ViewModels
 
         public void Update()
         {
-            if (crud.Validate(Anime, out List<string> errors))
+
+            if (Anime != null)
             {
-                crud.Update(Anime);
-                Anime = null;
-            }
-            else
-            {
-                Error = string.Join(Environment.NewLine, errors);
+                if (crud.Validate(Anime, out List<string> errors))
+                {
+                    var animeExists = crud.ReadOne(Anime.Id);
+                    if (animeExists != null)
+                    {
+                        animeExists.Id = Anime.Id;
+                        animeExists.Nombre = Anime.Nombre;
+                        animeExists.Autor = Anime.Autor;
+                        animeExists.Imagen = Anime.Imagen;
+                        animeExists.Capitulos = Anime.Capitulos;
+                        crud.Update(animeExists);
+                        Anime = null;
+                        ChangeView("home");
+
+                    }
+                }
+                else
+                {
+                    Error = string.Join(Environment.NewLine, errors);
+                }
             }
             PropertyChange();
         }
@@ -120,6 +164,18 @@ namespace Anime_CRUD.ViewModels
             if (View == "create")
             {
                  Anime = new Anime();
+            }
+            if (View == "edit")
+            {
+                Anime clon = new Anime()
+                {
+                    Id = Anime.Id,
+                    Autor = Anime.Autor,
+                    Capitulos = Anime.Capitulos,
+                    Imagen = Anime.Imagen,
+                    Nombre = Anime.Nombre
+                };
+                Anime = clon;
             }
             
             PropertyChange();
